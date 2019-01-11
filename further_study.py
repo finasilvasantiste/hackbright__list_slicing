@@ -102,9 +102,7 @@ def custom_insert(input_list, index, value):
         True
 
     """
-
-    pass
-
+    input_list[index:index] = [value]
 
 def custom_remove(input_list, value):
     """Remove the first item of the value in list.
@@ -121,8 +119,17 @@ def custom_remove(input_list, value):
         True
 
     """
+    index_counter = -1
 
-    pass
+    found_first_Occur = False
+
+    for i in input_list:
+        if found_first_Occur is False:
+            index_counter += 1
+            if i == value:
+                input_list[index_counter: index_counter+1] = []
+                found_first_Occur = True
+
 
 
 def custom_pop(input_list):
@@ -141,7 +148,8 @@ def custom_pop(input_list):
 
     """
 
-    return None
+    last_item = input_list.pop(-1)
+    return last_item
 
 
 def custom_index(input_list, value):
@@ -157,7 +165,14 @@ def custom_index(input_list, value):
 
     """
 
-    return 0
+    index_counter = -1
+
+    for i in input_list:
+        index_counter += 1
+        if i == value:
+             return index_counter
+
+
 
 
 def custom_count(input_list, value):
@@ -173,7 +188,13 @@ def custom_count(input_list, value):
 
     """
 
-    return 0
+    occur_counter = 0
+
+    for item in input_list:
+        if item == value:
+            occur_counter += 1
+
+    return occur_counter
 
 
 def custom_reverse(input_list):
@@ -192,7 +213,12 @@ def custom_reverse(input_list):
 
     """
 
-    pass
+    copy_list = input_list[:]
+    length =  custom_len(copy_list)
+
+    for i in range(length):
+        input_list[i:i+1] = [copy_list.pop()]
+
 
 
 def custom_contains(input_list, value):
@@ -212,7 +238,14 @@ def custom_contains(input_list, value):
 
     """
 
-    return None
+    contains = False
+
+    for i in input_list:
+        if i == value:
+            contains = True
+
+    return contains
+
 
 
 def custom_equality(some_list, another_list):
@@ -230,8 +263,19 @@ def custom_equality(some_list, another_list):
         False
 
     """
+    lists_are_same = False
 
-    return None
+    if custom_len(some_list) != custom_len(another_list):
+        lists_are_same = False
+
+    else: 
+        for items_a in some_list:
+            if custom_index(some_list, items_a) == custom_index(another_list, items_a):
+                lists_are_same = True
+            else:
+                lists_are_same = False
+
+    return lists_are_same
 
 
 ##############################################################################
